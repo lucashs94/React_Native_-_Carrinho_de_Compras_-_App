@@ -42,7 +42,7 @@ export default function Home() {
   ])
 
 
-  function handleAddCart( item ){
+  function handleAddCart(item) {
     addItemCart(item)
   }
 
@@ -56,11 +56,13 @@ export default function Home() {
           style={styles.cartButton}
           onPress={() => navigation.navigate('Cart')}
         >
-          <View style={styles.dot}>
-            <Text style={styles.dotText}>
-              { cart?.length }
-            </Text>
-          </View>
+          {cart.length >= 1 &&
+            <View style={styles.dot}>
+              <Text style={styles.dotText}>
+                {cart?.length}
+              </Text>
+            </View>
+          }
           <Feather name='shopping-cart' size={30} color='#000' />
         </TouchableOpacity>
       </View>
@@ -69,7 +71,7 @@ export default function Home() {
         style={styles.list}
         data={products}
         keyExtractor={item => String(item.id)}
-        renderItem={({ item }) => <Product data={item} addToCart={ () => handleAddCart(item) } />}
+        renderItem={({ item }) => <Product data={item} addToCart={() => handleAddCart(item)} />}
       />
 
     </SafeAreaView>
